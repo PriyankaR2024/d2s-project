@@ -5,7 +5,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors());
@@ -145,6 +145,7 @@ app.use('/api', forgotPasswordRoute);
 //app.get("/",(req,res)=>{
   //res.send("D2S backened running successfully");
 //});
+//const path = require("path");
 app.use(express.static(path.join(__dirname,"../")));
 
 
