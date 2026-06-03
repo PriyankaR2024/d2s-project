@@ -142,10 +142,10 @@ app.use('/api', forgotPasswordRoute);
 
 
 // Serve index.html
-app.get("/",(req,res)=>{
-  res.send("D2S backened running successfully");
-});
-
+//app.get("/",(req,res)=>{
+  //res.send("D2S backened running successfully");
+//});
+app.use(express.static(path.join(__dirname,"../")));
 
 
 const adminRoutes = require('./routes/adminRoutes'); // path as per your folder
