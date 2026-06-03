@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Driver Ride History</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .ride {
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.05);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Driver Ride History</h1>
+  <div id="rideHistoryContainer"></div>
+
+  <script>
+    const driverId = localStorage.getItem("userId");
+    const role = localStorage.getItem("role");
+
+    // Redirect if not driver
+    if (!driverId || role !== "Driver") {
+      alert("Not logged in as driver. Redirecting to login...");
+      window.location.href = "/index.html";
+    }
+
+    // Fetch and display completed rides
+    async function fetchRideHistory() {
+      try {
+        const res = await fetch("/api/bookings/all");
+        const bookings = await res.json();
+
+        const completed = bookings.filter(b => b.driverId === driverId && b.status === "Completed");
+        renderRideHistory(completed);
+      } catch (err) {
+        console.error("Failed to fetch ride history:", err);
+        document.getElementById("rideHistoryContainer").innerHTML = "<p>Error loading ride history.</p>";
+      }
+    }
+
+    function renderRideHistory(rides) {
+      const container = document.getElementById("rideHistoryContainer");
+      container.innerHTML = "";
+
+      if (rides.length === 0) {
+        container.innerHTML = "<p>No completed rides found.</p>";
+        return;
+      }
+
+      rides.forEach(ride => {
+        const div = document.createElement("div");
+        div.className = "ride";
+        div.innerHTML = `
+          <p><strong>Pickup:</strong> ${ride.pickupLocation}</p>
+          <p><strong>Drop:</strong> ${ride.dropLocation}</p>
+          <p><strong>Date:</strong> ${ride.date}</p>
+          <p><strong>Time:</strong> ${ride.time}</p>
+          <p><strong>Status:</strong> ${ride.status}</p>
+          <p><strong>Customer Name:</strong> ${ride.customerName}</p>
+          <p><strong>Customer Phone:</strong> ${ride.customerPhone}</p>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    window.onload = fetchRideHistory;
+  </script>
+
+</body>
+</html>

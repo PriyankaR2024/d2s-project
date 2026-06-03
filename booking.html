@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Book a Ride</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(120deg, #ff9a9e, #fad0c4, #fad0c4, #fbc2eb, #a18cd1);
+      background-size: 400% 400%;
+      animation: gradientBG 10s ease infinite;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    .booking-box {
+      background: #fff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+
+    .booking-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .booking-box input,
+    .booking-box select,
+    .booking-box button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    .booking-box button {
+      background-color: #2196F3;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      border: none;
+      transition: background-color 0.3s;
+    }
+
+    .booking-box button:hover {
+      background-color: #1976d2;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="booking-box">
+    <h2>Book a Ride</h2>
+    <form id="bookingForm">
+      <input type="text" id="userId" placeholder="Your User ID" required />
+      <input type="text" id="pickupLocation" placeholder="Pickup Location" required />
+      <input type="text" id="dropLocation" placeholder="Drop Location" required />
+      <input type="date" id="date" required />
+      <input type="time" id="time" required />
+      <select id="vehicleType" required>
+        <option value="">Select Vehicle Type</option>
+        <option value="Two-wheeler">Two-wheeler</option>
+        <option value="Three-wheeler">Three-wheeler</option>
+        <option value="Four-wheeler">Four-wheeler</option>
+      </select>
+      <button type="submit">Book Now</button>
+    </form>
+  </div>
+
+  <script src="Booking.js"></script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>View Profile</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+    }
+    .profile-card {
+      border: 1px solid #ccc;
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+    }
+    .profile-card h2 {
+      text-align: center;
+    }
+    .field {
+      margin: 10px 0;
+    }
+    .field label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .field input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #aaa;
+      border-radius: 5px;
+      background-color: #f1f1f1;
+    }
+  </style>
+  
+</head>
+<body>
+  <div class="profile-card">
+    <h2>User Profile</h2>
+
+    <div class="field">
+      <label for="username">Full Name:</label>
+      <input type="text" id="username" disabled />
+    </div>
+
+    <div class="field">
+      <label for="phone">Phone:</label>
+      <input type="text" id="phone" disabled />
+    </div>
+
+    <div class="field">
+      <label for="email">Email:</label>
+      <input type="text" id="email" disabled />
+    </div>
+
+    <div class="field">
+      <label for="role">Role:</label>
+      <input type="text" id="role" disabled />
+    </div>
+
+    <div class="field" id="driver-fields" style="display: none;">
+      <label for="licenseNumber">License Number:</label>
+      <input type="text" id="licenseNumber" disabled />
+
+      <label for="vehicleType">Vehicle Type:</label>
+      <input type="text" id="vehicleType" disabled />
+
+      <label for="vehicleNumber">Vehicle Number:</label>
+      <input type="text" id="vehicleNumber" disabled />
+    </div>
+  </div>
+
+  <script>
+    const userId = localStorage.getItem("userId");
+    console.log("User ID from localStorage:", userId);
+
+    async function loadUserProfile() {
+      const userId = localStorage.getItem("userId");
+      if (!userId) {
+        alert("User not logged in.");
+        return;
+      }
+
+      try {
+      
+        
+        console.log("Fetching profile from: ", `/api/profile/${userId}`);
+const res = await fetch(`/api/profile/${userId}`);
+console.log("Fetch response status:", res.status);
+
+const user = await res.json();
+console.log("Response JSON:", user);
+
+if (!res.ok) {
+  throw new Error(user.message || "Failed to load profile");
+}
+
+
+
+        if (!res.ok) throw new Error(user.message || "Failed to load profile");
+
+        // Set values in inputs
+        document.getElementById("username").value = user.username || "";
+        document.getElementById("phone").value = user.phone || "";
+        document.getElementById("email").value = user.email || "";
+        document.getElementById("role").value = user.role || "";
+
+        if (user.role === "Driver") {
+          document.getElementById("driver-fields").style.display = "block";
+          document.getElementById("licenseNumber").value = user.licenseNumber || "";
+          document.getElementById("vehicleType").value = user.vehicleType || "";
+          document.getElementById("vehicleNumber").value = user.vehicleNumber || "";
+        }
+
+      } catch (err) {
+        console.error("Error loading profile:", err);
+        alert("Failed to load profile. Please try again later.");
+      }
+    }
+
+    window.onload = loadUserProfile;
+  </script>
+</body>
+</html>

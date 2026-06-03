@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Check Booking Status</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f4f4f4;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    #statusContainer {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .booking {
+      border-bottom: 1px solid #ccc;
+      padding: 10px 0;
+    }
+    .booking:last-child {
+      border-bottom: none;
+    }
+    #paymentForm {
+      display: none;
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      width: 300px;
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      z-index: 999;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Your Bookings</h1>
+  <div id="statusContainer">
+    <p>Loading your bookings...</p>
+  </div>
+
+  <!-- Floating Payment Form -->
+  <div id="paymentForm">
+    <h3>Mock Payment</h3>
+    <label>Enter Amount:</label><br>
+    <input type="text" id="paymentAmount" placeholder="Amount" style="width: 100%; padding: 8px; margin: 5px 0;"><br>
+    <input type="text" placeholder="Card Number" style="width: 100%; padding: 8px; margin: 5px 0;"><br>
+    <input type="text" placeholder="Expiry Date" style="width: 100%; padding: 8px; margin: 5px 0;"><br>
+    <input type="text" placeholder="CVV" style="width: 100%; padding: 8px; margin: 5px 0;"><br>
+    <button onclick="processPayment()" style="padding: 8px 15px; background: green; color: white; border: none; border-radius: 5px;">Submit Payment</button>
+  </div>
+
+  <script>
+    const userId = localStorage.getItem("userId");
+    let bookings = [];
+    let currentBookingId = null;
+
+    async function fetchCustomerBookings() {
+      try {
+        const res = await fetch(`/api/bookings/status/${userId}`);
+
+        if (!res.ok) throw new Error(`Status ${res.status}`);
+        bookings = await res.json();
+
+        const container = document.getElementById("statusContainer");
+        container.innerHTML = "";
+
+        if (!bookings || bookings.length === 0) {
+          container.innerHTML = "<p>No bookings found.</p>";
+          return;
+        }
+
+        bookings.forEach(b => {
+          const div = document.createElement("div");
+          div.className = "booking";
+
+          let actionHTML = "";
+
+          if (b.status === "Accepted" && b.paymentStatus !== "Paid") {
+            actionHTML = `<button onclick="showPaymentForm('${b._id}')">Pay Now</button>`;
+          } else if (b.paymentStatus === "Paid") {
+            actionHTML = `<p style="color: green;"><strong>Payment Successful</strong></p>`;
+          } else if (b.status === "Pending") {
+            actionHTML = `<p style="color: red;"><strong>Ride not yet accepted. Payment unavailable.</strong></p>`;
+          }
+
+          div.innerHTML = `
+            <p><strong>Pickup:</strong> ${b.pickupLocation}</p>
+            <p><strong>Drop:</strong> ${b.dropLocation}</p>
+            <p><strong>Date:</strong> ${b.date}</p>
+            <p><strong>Time:</strong> ${b.time}</p>
+            <p><strong>Status:</strong> ${b.status}</p>
+            ${actionHTML}
+          `;
+          container.appendChild(div);
+        });
+
+      } catch (err) {
+        console.error("Error fetching bookings:", err);
+        document.getElementById("statusContainer").innerHTML = "<p>Error loading bookings.</p>";
+      }
+    }
+
+    function showPaymentForm(bookingId) {
+      const booking = bookings.find(b => b._id === bookingId);
+
+      if (booking && booking.status !== "Accepted") {
+        alert("You can only pay once the driver accepts your ride.");
+        return;
+      }
+
+      currentBookingId = bookingId;
+      document.getElementById("paymentForm").style.display = "block";
+    }
+
+    async function processPayment() {
+      alert("Processing payment...");
+
+      const res = await fetch(`/api/bookings/${currentBookingId}/payment`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" }
+      });
+
+      if (res.ok) {
+        alert("Payment successful!");
+        location.reload();
+      } else {
+        alert("Something went wrong updating payment.");
+      }
+    }
+
+    fetchCustomerBookings();
+  </script>
+
+</body>
+</html>

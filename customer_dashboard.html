@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Customer Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4, #fbc2eb, #a6c1ee);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .dashboard {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      text-align: center;
+      max-width: 600px;
+      width: 90%;
+    }
+    .dashboard h2 {
+      margin-bottom: 20px;
+    }
+    .tabs button {
+      padding: 12px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 10px;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .tabs button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <h2>Welcome, Customer</h2>
+    
+    <div class="tabs">
+      <button onclick="location.href='booking.html'">Book</button>
+      <button onclick="location.href='customer_check_status.html'">Check Status</button>
+      <button onclick="location.href='check_history.html'">Check History</button>
+      <button onclick="location.href='view_profile.html'">View Profile</button>
+      <button onclick="window.location.href='logout.html'">Logout</button>
+    </div>
+  </div>
+</body>
+</html>

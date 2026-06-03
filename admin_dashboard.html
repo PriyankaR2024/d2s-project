@@ -1,0 +1,54 @@
+<!-- admin_dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ffecd2, #fcb69f, #ff9a9e, #fecfef);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .dashboard {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+    .dashboard h2 {
+      margin-bottom: 20px;
+    }
+    .tabs button {
+      padding: 12px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 10px;
+      background-color: #e91e63;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .tabs button:hover {
+      background-color: #d81b60;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <h2>Welcome, Admin</h2>
+    <div class="tabs">
+      <button onclick="location.href='admin_view_users.html'">View All Users</button>
+
+      <button onclick="location.href='admin_view_bookings.html'">View All Bookings</button>
+      <button onclick="window.location.href='logout.html'">Logout</button>
+    </div>
+  </div>
+</body>
+</html>

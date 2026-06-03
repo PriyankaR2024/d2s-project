@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Signup Success - D2S</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .card {
+      background: white;
+      color: #333;
+      padding: 30px 40px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: 26px;
+      color: #0072ff;
+    }
+
+    #userId {
+      font-size: 22px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      background: #0072ff;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+    }
+
+    a:hover {
+      background: #005fcc;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Signup Successful!</h1>
+    <p>Your unique D2S ID is:</p>
+    <div id="userId"></div>
+    <a href="index.html">Go to Login</a>
+  </div>
+
+  <script>
+    const userId = localStorage.getItem("d2s-user-id");
+    document.getElementById("userId").innerText = userId ? userId : "Not Found";
+  </script>
+</body>
+</html>

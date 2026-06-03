@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Driver Update Booking Status</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h2 { margin-top: 40px; }
+    .booking {
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+    button {
+      margin-right: 10px;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .accept { background-color: #4CAF50; color: white; }
+    .cancel { background-color: #f44336; color: white; }
+    .complete { background-color: #2196F3; color: white; }
+  </style>
+</head>
+<body>
+  <h1>Driver Booking Panel</h1>
+
+  <section>
+    <h2>Pending & Accepted Bookings</h2>
+    <div id="bookingList"></div>
+  </section>
+
+  <script>
+    const driverId = localStorage.getItem("userId");
+
+    async function fetchBookings() {
+      const res = await fetch("/api/bookings/all");
+      const bookings = await res.json();
+
+      // Only include Pending (no driverId) and Accepted (by this driver)
+      const relevant = bookings.filter(b =>
+        (b.status === "Pending" && !b.driverId) ||
+        (b.status === "Accepted" && b.driverId === driverId)
+      );
+
+      renderBookings(relevant);
+    }
+
+    function renderBookings(bookings) {
+      const container = document.getElementById("bookingList");
+      container.innerHTML = "";
+
+      if (bookings.length === 0) {
+        container.innerHTML = "<p>No pending or accepted bookings.</p>";
+        return;
+      }
+
+      bookings.forEach(booking => {
+        const div = document.createElement("div");
+        div.className = "booking";
+        div.innerHTML = `
+          <p><strong>Pickup:</strong> ${booking.pickupLocation}</p>
+          <p><strong>Drop:</strong> ${booking.dropLocation}</p>
+          <p><strong>Date:</strong> ${booking.date}</p>
+          <p><strong>Time:</strong> ${booking.time}</p>
+          <p><strong>Status:</strong> ${booking.status}</p>
+          <p><strong>Customer Name:</strong> ${booking.customerName}</p>
+          <p><strong>Customer Phone:</strong> ${booking.customerPhone}</p>
+        `;
+
+        if (booking.status === "Pending") {
+          const acceptBtn = document.createElement("button");
+          acceptBtn.textContent = "Accept";
+          acceptBtn.className = "accept";
+          acceptBtn.onclick = () => updateBooking(booking.bookingId, "Accepted");
+
+          const cancelBtn = document.createElement("button");
+          cancelBtn.textContent = "Cancel";
+          cancelBtn.className = "cancel";
+          cancelBtn.onclick = () => cancelBooking(booking.bookingId);
+
+          div.appendChild(acceptBtn);
+          div.appendChild(cancelBtn);
+        }
+
+        if (booking.status === "Accepted" && booking.driverId === driverId) {
+          const completeBtn = document.createElement("button");
+          completeBtn.textContent = "Mark Completed";
+          completeBtn.className = "complete";
+          completeBtn.onclick = () => updateBooking(booking.bookingId, "Completed");
+
+          const cancelBtn = document.createElement("button");
+          cancelBtn.textContent = "Cancel";
+          cancelBtn.className = "cancel";
+          cancelBtn.onclick = () => cancelBooking(booking.bookingId);
+
+          div.appendChild(completeBtn);
+          div.appendChild(cancelBtn);
+        }
+
+        container.appendChild(div);
+      });
+    }
+
+    async function updateBooking(bookingId, status) {
+      await fetch(`/api/bookings/${bookingId}/status`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status, driverId })
+      });
+      fetchBookings();
+    }
+
+    async function cancelBooking(bookingId) {
+      await fetch(`/api/bookings/${bookingId}/cancel`, {
+        method: "PUT"
+      });
+      fetchBookings();
+    }
+
+    window.onload = fetchBookings;
+  </script>
+</body>
+</html>
