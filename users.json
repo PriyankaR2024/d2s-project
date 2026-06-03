@@ -1,0 +1,112 @@
+[
+  {
+    "id": "d2s-9546",
+    "username": "priyanka",
+    "phone": "9810751004",
+    "email": "pban@df.com",
+    "password": "1234",
+    "role": "Customer"
+  },
+  {
+    "id": "d2s-3143",
+    "username": "Rani",
+    "phone": "98567890123",
+    "email": "pban@123",
+    "password": "1234",
+    "role": "Driver"
+  },
+  {
+    "id": "d2s-4249",
+    "username": "nikita",
+    "phone": "7890149790",
+    "email": "pban@df.com",
+    "password": "bnjk,l.",
+    "role": "Driver"
+  },
+  {
+    "id": "d2s-6765",
+    "username": "priyanka",
+    "phone": "98567890123",
+    "email": "pban@df.com",
+    "password": "gytjtj",
+    "role": "Driver"
+  },
+  {
+    "id": "d2s-6622",
+    "username": "priyanka",
+    "phone": "98567890123",
+    "email": "pban@df.com",
+    "password": "gytjtj",
+    "role": "Driver"
+  },
+  {
+    "id": "d2s-5774",
+    "username": "priyanka",
+    "phone": "98567890123",
+    "email": "pban@df.com",
+    "password": "gytjtj",
+    "role": "Driver"
+  },
+  {
+    "id": "d2s-2208",
+    "username": "priyanka",
+    "phone": "98567890123",
+    "email": "pban@df.com",
+    "password": "455465",
+    "role": "Customer"
+  },
+  {
+    "id": "d2s-938",
+    "username": "Shobha",
+    "phone": "9810751002",
+    "email": "dfhdj@123.com",
+    "password": "Shobha@123",
+    "role": "Customer"
+  },
+  {
+    "id": "d2s-3445",
+    "username": "Shobha",
+    "phone": "9319294402",
+    "email": "dfhdj@123.com",
+    "password": "Kitty@123",
+    "role": "Driver",
+    "licenseNumber": "45698",
+    "vehicleType": "U-12",
+    "vehicleNumber": "1654"
+  },
+  {
+    "id": "d2s-8584",
+    "username": "Priyanka",
+    "phone": "9319294402",
+    "email": "dkdkjop@qw.com",
+    "password": "Qwerty@123",
+    "role": "Customer"
+  },
+  {
+    "id": "d2s-8042",
+    "username": "Priyanka",
+    "phone": "9319294404",
+    "email": "dfhdj@123.com",
+    "password": "ASdfg@123",
+    "role": "Driver",
+    "licenseNumber": "454",
+    "vehicleType": "hj",
+    "vehicleNumber": "454"
+  },
+  {
+    "id": "d2s-8584",
+    "username": "Sudha",
+    "phone": "9319294402",
+    "email": "dkdkjop@qw.com",
+    "password": "Qwerty@123",
+    "role": "Customer"
+  },
+  {
+    "id": "d2s-8117",
+    "username": "Sakshi",
+    "phone": "9319294402",
+    "email": "Sakshi@123.com",
+    "password": "Sakshi@123",
+    "role": "Customer"
+  }
+]
