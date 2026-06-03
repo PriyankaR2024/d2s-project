@@ -11,7 +11,7 @@ const PORT = 3000;
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, '../')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 // MongoDB Atlas URI
 const mongoURI = "mongodb+srv://pbangarirawat:Pbangarirawat%40Atlas@cluster0.dwbvl7m.mongodb.net/d2s_db?retryWrites=true&w=majority&appName=Cluster0";
