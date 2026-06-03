@@ -147,6 +147,8 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../d2s/index.html"));
 });
 
+
+
 const adminRoutes = require('./routes/adminRoutes'); // path as per your folder
 app.use('/api/admin', adminRoutes);
 
