@@ -55,13 +55,8 @@ body, html {
     cursor: pointer;
 }
 .background::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-
-    background-image: radial-gradient(circle, rgba(255,255,255,0.18) 1px, transparent 1px);
-    background-size: 22px 22px;
-
-    opacity: 0.35;
-    pointer-events: none;
+   background-image:
+       radial-gradient(circle, vlack 2px, transparent 2px);
+        background-size: 20px 20px;
+        opacity:0.3;
 }
