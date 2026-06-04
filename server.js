@@ -13,8 +13,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // MongoDB Atlas URI
-const mongoURI = "mongodb+srv://pbangarirawat:Pbangarirawat%40Atlas@cluster0.dwbvl7m.mongodb.net/d2s_db?retryWrites=true&w=majority&appName=Cluster0";
-
+//const mongoURI = "mongodb+srv://pbangarirawat:Pbangarirawat%40Atlas@cluster0.dwbvl7m.mongodb.net/d2s_db?retryWrites=true&w=majority&appName=Cluster0";
+ const mongoURI = process.env.MONGO_URI
 // Connect to MongoDB
 mongoose.connect(mongoURI, {
   useNewUrlParser: true,
