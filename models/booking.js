@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 
 const bookingSchema = new mongoose.Schema({
-  userId: String,
+ // userId: String,
   driverId: String,
   pickupLocation: String,
   dropLocation: String,
