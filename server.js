@@ -142,9 +142,9 @@ app.use('/api', forgotPasswordRoute);
 
 
 // Serve index.html
-//app.get("/",(req,res)=>{
-  //res.send("D2S backened running successfully");
-//});
+app.get("/",(req,res)=>{
+   res.send("D2S backened running successfully");
+});
 //const path = require("path");
 app.use(express.static(path.join(__dirname)));
 
@@ -157,5 +157,5 @@ app.use('/api/admin', adminRoutes);
 
 // Start Server
 app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
