@@ -1,7 +1,7 @@
 document.getElementById('bookingForm').addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  const userId = document.getElementById('userId').value.trim();
+//  const userId = document.getElementById('userId').value.trim();
   const pickupLocation = document.getElementById('pickupLocation').value.trim();
   const dropLocation = document.getElementById('dropLocation').value.trim();
   const date = document.getElementById('date').value;
@@ -15,7 +15,7 @@ document.getElementById('bookingForm').addEventListener('submit', async (e) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        userId,
+       // userId,
         pickupLocation,
         dropLocation,
         date,
