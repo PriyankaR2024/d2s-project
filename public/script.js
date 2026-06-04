@@ -56,7 +56,7 @@ async function handleSignup(e) {
     };
   
     try {
-      const res = await fetch("http://localhost:3000/signup", {
+      const res = await fetch("https://d2s-project.onrender.com/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData)
