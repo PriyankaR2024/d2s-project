@@ -5,6 +5,7 @@ body, html {
     font-family: 'Segoe UI', sans-serif;
     height: 100%;
 }
+/*
 .background {
     background: linear-gradient(135deg, #ff9aa2, #ffb7b2, #ffdac1, #e2f0cb, #b5ead7);
     height: 100vh;
@@ -12,6 +13,20 @@ body, html {
     justify-content: center;
     align-items: center;
 }
+
+*/
+.background {
+    background: linear-gradient(135deg, #ff9aa2, #ffb7b2, #ffdac1, #e2f0cb, #b5ead7);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+    overflow: hidden;
+}
+
+
 .login-box {
     background: #fff;
     padding: 30px;
@@ -34,4 +49,15 @@ body, html {
     font-weight: bold;
     border: none;
     cursor: pointer;
+}
+.background::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background-image: radial-gradient(circle, rgba(255,255,255,0.18) 1px, transparent 1px);
+    background-size: 22px 22px;
+
+    opacity: 0.35;
+    pointer-events: none;
 }
