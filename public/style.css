@@ -15,6 +15,10 @@ body, html {
 }
 
 */
+.login-box{
+    position: relative;
+    z-index:2;
+}
 .background {
     background: linear-gradient(135deg, #ff9aa2, #ffb7b2, #ffdac1, #e2f0cb, #b5ead7);
     height: 100vh;
